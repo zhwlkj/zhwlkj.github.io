@@ -1,153 +1,546 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>卧龙控股</title>
-<link rel="stylesheet" href="css/style.css" />
-</head>
-<body>
-
-<!-- 页头 -->
-<div id="header">
-	<a href="#" class="logo"><img src="images/logo.png" /></a>
-	<div class="search">
-    	<input type="text" class="txt" placeholder="SEARCH..." />
-    	<input type="submit" class="sub" value="" />
+<!DOCTYPE html>
+<html lang="zh_CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>privacy</title>
+    <style>
+      .bg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        z-index: 1;
+      }
+      .bg.active {
+        z-index: 2;
+      }
+      .centerBox {
+        z-index: 5;
+      }
+      .clearfix {
+        *zoom: 1;
+      }
+      .clearfix:before,
+      .clearfix:after {
+        display: table;
+        line-height: 0;
+        content: '';
+      }
+      .clearfix:after {
+        clear: both;
+      }
+      body {
+        font-family: 'Roboto', Arial, sans-serif;
+        color: #fff;
+        background: #000;
+        margin: 0;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-size-adjust: 100%;
+        -webkit-transition: opacity 400ms;
+        -moz-transition: opacity 400ms;
+        transition: opacity 400ms;
+      }
+      a,
+      a:visited {
+        color: #eee;
+        text-decoration: none;
+        cursor: pointer !important;
+      }
+      a:hover,
+      a:active {
+        color: #eee;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: 'Roboto', Arial, sans-serif;
+      }
+      h1 {
+        font-size: 2.5em;
+        font-weight: 300;
+      }
+      h2 {
+        font-size: 1.5em;
+        font-weight: 300;
+      }
+      h3 {
+        font-size: 1.2em;
+        font-weight: 400;
+      }
+      .centerBox {
+        position: absolute;
+        top: 50%;
+        margin-top: -210px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+      }
+      .menu {
+        max-width: 624px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        height: 395px;
+      }
+      .container .header {
+        margin: 0 auto;
+        padding: 5px;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.01);
+      }
+      .container .header span {
+        display: block;
+        font-size: 60%;
+        opacity: 0.8;
+        padding-bottom: 0.6em;
+      }
+      .nav-top {
+        text-transform: uppercase;
+        width: 100%;
+        line-height: 2.6;
+        height: 36px;
+        position: absolute;
+        bottom: 0;
+      }
+      .nav-top a {
+        padding: 0.41em 1em;
+        letter-spacing: 0.1em;
+        color: #eee;
+        display: inline-block;
+        font-size: 10px;
+      }
+      .nav-top a:hover {
+        color: #fff;
+      }
+      .nav-top span.right {
+        float: right;
+      }
+      .nav-top span.right a {
+        float: left;
+        display: block;
+      }
+      .nav-top,
+      .header,
+      .menu {
+        position: relative;
+      }
+      #appDownload {
+        width: 100%;
+        text-align: center;
+        position: absolute;
+        bottom: 50px;
+        left: 0;
+        border: 0;
+        outline: 0;
+        z-index: 100;
+        color: #bbb;
+        background: transparent;
+        -moz-transition: all 0.2s cubic-bezier(0.7, 0.01, 0.3, 1);
+        -o-transition: all 0.2s cubic-bezier(0.7, 0.01, 0.3, 1);
+        -webkit-transition: all 0.2s cubic-bezier(0.7, 0.01, 0.3, 1);
+        transition: all 0.2s cubic-bezier(0.7, 0.01, 0.3, 1);
+        font: 36px Heiti, 'Lucida Grande', Arial;
+        font-weight: bold;
+      }
+      #appDownload span img {
+        width: 50px;
+        height: 50px;
+      }
+      #appDownload span {
+        display: inline-block;
+        position: relative;
+        top: -10px;
+        -moz-transition: all 0.7s cubic-bezier(0.7, 0.01, 0.3, 1);
+        -o-transition: all 0.7s cubic-bezier(0.7, 0.01, 0.3, 1);
+        -webkit-transition: all 0.7s cubic-bezier(0.7, 0.01, 0.3, 1);
+        transition: all 0.7s cubic-bezier(0.7, 0.01, 0.3, 1);
+      }
+      .homeHeader {
+        margin-top: 0;
+      }
+      .logo {
+        max-width: 220px;
+        width: 100%;
+        margin: 0 auto;
+      }
+      .sublogo {
+        max-width: 90px;
+        width: 100%;
+        margin: 0 auto;
+        margin-bottom: -29px;
+      }
+      .menulogo {
+        max-width: 90px;
+        width: 100%;
+        margin: 0 auto;
+      }
+      .downloadBtnHome {
+        max-width: 172px;
+        width: 100%;
+      }
+      .headerLink {
+        color: #fff;
+        font-size: 10px;
+        text-transform: uppercase;
+      }
+      .dlIcons {
+        max-width: 20px;
+      }
+      .dlIconsSideMenu {
+        max-width: 30px;
+      }
+      .menuDLiconsBox {
+        position: absolute;
+        bottom: 40px;
+      }
+      .menuDLicons {
+        display: inline !important;
+        margin: 0 0 0 25px !important;
+        padding: 0 !important;
+      }
+      #sticker a {
+        line-height: 12px;
+        font-size: 16px;
+        color: #eee;
+      }
+      #sticker a:hover {
+        color: #fff;
+      }
+      #sticker ul {
+        list-style: none;
+      }
+      #sticker li {
+        padding-bottom: 10px;
+      }
+      div#wrapper {
+        margin: 0 auto;
+        width: auto;
+        max-width: 787px;
+        word-wrap: break-word;
+      }
+      .aboutContainer {
+        padding: 20px;
+      }
+      div#sideBar {
+        width: 177px;
+        padding: 43px 0 20px 0;
+        margin-right: 0;
+        float: left;
+        text-align: right;
+      }
+      .clear {
+        clear: both;
+      }
+      div#sticker {
+        padding: 20px 0;
+        margin: 0 0;
+        width: 177px;
+      }
+      .stick {
+        position: fixed;
+        top: 0;
+      }
+      .container {
+        -webkit-animation: fadein 1s;
+        -moz-animation: fadein 1s;
+        -ms-animation: fadein 1s;
+        -o-animation: fadein 1s;
+        animation: fadein 1s;
+      }
+      @keyframes fadein {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @-moz-keyframes fadein {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @-webkit-keyframes fadein {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @-ms-keyframes fadein {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @-o-keyframes fadein {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      .content-wrap {
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+      }
+      .content-wrap {
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+      }
+      .content {
+        position: relative;
+        background: #b4bad2;
+      }
+      @media only screen and (max-width: 768px) {
+        .sublogo {
+          display: block;
+          margin-bottom: 0;
+          padding: 20px 0 0 0;
+        }
+        .subheader {
+          display: block;
+          text-align: center;
+          font-size: 32px;
+        }
+        #appDownload {
+          bottom: 5px;
+        }
+        .centerBox {
+          margin-top: -200px;
+        }
+        div#sideBar {
+          display: none;
+        }
+      }
+      .tousec li {
+        padding-bottom: 0.5em;
+      }
+      .touOlDecimal {
+        margin-left: 40px;
+        list-style: decimal outside none;
+      }
+      .touOlUpperAlpha {
+        list-style: upper-alpha inside none;
+      }
+      .touOlUpperAlpha li {
+        padding-bottom: 0.5em;
+        text-indent: 40px;
+      }
+      .touOlLowerAlpha {
+        margin-left: 40px;
+        list-style: lower-alpha outside none;
+      }
+      .touOlLowerRoman {
+        margin-left: 40px;
+        list-style: lower-roman outside none;
+      }
+      .touOlLowerRoman li {
+        text-indent: 0;
+      }
+      .touUlDisc {
+        margin-left: 40px;
+        list-style: disc outside none;
+      }
+      .touUlDisc li {
+        text-indent: 0;
+      }
+      .ppsec li {
+        padding-bottom: 0.5em;
+      }
+      .ppOlDecimal {
+        margin-left: 40px;
+        list-style: decimal outside none;
+      }
+      .ppOlUpperAlpha {
+        list-style: upper-alpha inside none;
+      }
+      .ppOlUpperAlpha li {
+        padding-bottom: 0.5em;
+        text-indent: 40px;
+      }
+      .ppOlLowerAlpha {
+        margin-left: 40px;
+        list-style: lower-alpha outside none;
+      }
+      .ppOlLowerRoman {
+        margin-left: 40px;
+        list-style: lower-roman outside none;
+      }
+      .ppOlLowerRoman li {
+        text-indent: 0;
+      }
+      .ppUlDisc {
+        margin-left: 40px;
+        list-style: disc outside none;
+      }
+      .ppUlDisc li {
+        text-indent: 0;
+      }
+      @media print {
+        q {
+          quotes: none;
+        }
+        q:before,
+        q:after {
+          content: '';
+        }
+        img {
+          display: none;
+          border: 0;
+        }
+        button {
+          display: none;
+          border: 0;
+        }
+        .menu-button {
+          display: none;
+          border: 0;
+        }
+        body {
+          font: 12pt arial, helvetica, tahoma, san-serif;
+          line-height: 1.5;
+          color: #000 !important;
+          background: #fff !important;
+        }
+        p {
+          font-size: 12px !important;
+        }
+        h1 {
+          font-size: 18px !important;
+        }
+        h2 {
+          font-size: 14px;
+          margin-top: 25px;
+          font-weight: bold;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="mainContent">
+        <article class="aboutContainer">
+          <div class="aboutText">
+            <h1 class="subheader">Privacy</h1>
+            <h2>Storing data</h2>
+            <p>
+              Grab Chat only stores the data it needs to function properly - for
+              as long as you want Grab Chat to function.
+            </p>
+            <h3>Cloud Chats</h3>
+            <p>
+              Grab Chat is a cloud service. We store messages, photos, videos
+              and documents from your cloud chats on our servers, so that you
+              can access your data from any of your devices anytime and use our
+              instant server search to quickly access your messages from waaay
+              back. All data is stored heavily encrypted and the encryption keys
+              in each case are stored in several other DCs in different
+              jurisdictions. This way local engineers or physical intruders
+              cannot get access to user data.
+            </p>
+            <h3>Secret Chats</h3>
+            <p>
+              Secret chats use end-to-end encryption. This means that all data
+              is encrypted with a key that only you and the recipient know.
+              There is no way for us or anybody else without direct access to
+              your device to learn what content is being sent in those messages.
+              We do not store your secret chats on our servers. We also do not
+              keep any logs for messages in secret chats, so after a short
+              period of time we no longer know who or when you messaged via
+              secret chats. For the same reasons secret chats are not available
+              in the cloud - you can only access those messages from the device
+              they were sent to or from.
+            </p>
+            <h3>Media in Secret Chats</h3>
+            <p>
+              When you send photos, videos or files via secret chats, before
+              being uploaded each item is encrypted with a separate key, not
+              known to the server. This key and the file’s location are then
+              encrypted again, this time with the secret chat’s key — and sent
+              to your recipient. He can then download and decipher the file.
+              This means that the file is technically on one of Grab Chat’s
+              servers, but it looks like a piece of random indecipherable
+              garbage to everyone except for you and the recipient. We don’t
+              know what this random data stands for and we have no idea which
+              particular chat it belongs to. We periodically purge this random
+              data from our servers to save disk space.
+            </p>
+            <h3>Contacts</h3>
+            <p>
+              Grab Chat uses phone numbers as unique identifiers, so that it is
+              easy for you to switch from other messaging apps (SMS, WhatsApp,
+              etc.) and retain your social graph. We ask your permission before
+              syncing your contacts. We store your contacts in order to notify
+              you as soon as one of your contacts signs up for Grab Chat and to
+              properly display names in notifications. We only need the number
+              and name (first and last) for this to work and store no other data
+              about your contacts.
+            </p>
+            <h3>Your e-mail address</h3>
+            <p>
+              When you enable 2-step-verification for your account, you can opt
+              to set up a password recovery email. This address will only be
+              used to send you a password recovery code, if you forget it.
+              That's right: no marketing or “we miss you” bullshit.
+            </p>
+            <br />
+            <h2>Sharing data</h2>
+            <p>
+              We never share your data with anyone. No.
+            </p>
+            <br />
+            <h2>Deleting data</h2>
+            <h3>Accounts</h3>
+            <p>
+              If you would like to delete your account, you can do this on the
+              deactivation page. Deleting your account permanently removes all
+              your messages, groups and contacts. This action must be confirmed
+              via your Grab Chat account and cannot be undone.
+            </p>
+            <h3>Messages</h3>
+            <p>
+              Everything you delete is deleted forever. Except for cats. We
+              never delete your funny cat pictures, we love them too much. When
+              you delete a message, you delete it from your message history.
+              This means that a copy still stays on the server as part of your
+              partner‘s message history. As soon as your partner deletes it too,
+              it’s gone forever. Grab Chat's goal is not to bring profit and we
+              value the disk space on our servers greatly.
+            </p>
+            <h3>Self-destructing messages</h3>
+            <p>
+              Messages in Secret Chats can be ordered to self-destruct. As soon
+              as such a message is read (2 checks appear), the countdown starts.
+              When the time is out, both devices participating in a secret chat
+              are instructed to delete the message (photo, video, etc.).
+            </p>
+            <h3>Account self-destruction</h3>
+            <p>
+              Grab Chat is not a commercial organization and we value our disk
+              space greatly. If you stop using Grab Chat and do not login for at
+              least 6 months, your account will be deleted along with all
+              messages, media, contacts and every other piece of data you store
+              in the Grab Chat cloud. You can change the exact period after
+              which your inactive account will self-destruct in Settings.
+            </p>
+          </div>
+          <br />
+          <br />
+          <br />
+          &nbsp;
+        </article>
+      </div>
     </div>
-</div>
-
-<!-- 导航 -->
-<div id="nav">
-	<ul>
-    	<li class="te"><a href="#">哈哈哈</a></li>
-        <li><a href="#">哈哈哈</a></li>
-        <li><a href="#">哈哈哈</a></li>
-        <li><a href="#">哈哈哈</a></li>
-        <li><a href="#">哈哈哈</a></li>
-        <li><a href="#">哈哈哈</a></li>
-        <li><a href="#">哈哈哈</a></li>
-        <li><a href="#">哈哈哈</a></li>
-    </ul>
-</div>
-
-<!-- 广告栏 -->
-<div id="banner"><img src="images/banner.png" /></div>
-
-<!-- 主体 -->
-<div id="main">
-	<div class="main-t">
-    	<div class="main-t-l">
-        	<h3>我是标题</h3>
-        	<ul>
-        		<li>
-                	<a href="#">今天知道一条狗的名字地瓜</a>
-                    <span>1997-07-13</span>
-                </li>
-                <li>
-                	<a href="#">今天知道一条狗的名字地瓜</a>
-                    <span>1997-07-13</span>
-                </li>
-                <li>
-                	<a href="#">今天知道一条狗的名字地瓜</a>
-                    <span>1997-07-13</span>
-                </li>
-                <li>
-                	<a href="#">今天知道一条狗的名字地瓜 它还有个别名叫瓜瓜 呱呱叫 瓜叫瓜 地瓜是条狗 一点也不可爱</a>
-                    <span>1997-07-13</span>
-                </li>
-                <li>
-                	<a href="#">今天知道一条狗的名字地瓜</a>
-                    <span>1997-07-13</span>
-                </li>
-                <li>
-                	<a href="#">今天知道一条狗的名字地瓜</a>
-                    <span>1997-07-13</span>
-                </li>
-            </ul>
-        </div>
-    	<div class="main-t-c">
-        	<h3>我是标题</h3>
-        	<h4>哈哈哈哈啊哈哈哈哈哈哈哈哈</h4>
-            <p>今天是最后一天给你们讲课了 很遗憾我要走了...</p>
-        </div>
-    	<div class="main-t-r">
-        	<h3>我是标题</h3>
-        	<p>立刻集散地立刻洒家灯笼裤洒家灯笼裤洒家的撒大就撒了</p>
-            <a href="#"><img src="images/mroe.png" /></a>
-        </div>
-    </div>
-	<div class="main-c">哈哈哈哈</div>
-	<div class="main-b">
-    	<ul>
-       		<li>
-            	<img src="images/t1.png" />
-                <p>啊看手机打开撒旦撒扩大了凯撒的雷克萨的就凉...</p>
-            </li>
-            <li>
-            	<img src="images/t1.png" />
-                <p>啊看手机打开撒旦撒扩大了凯撒的雷克萨的就凉...</p>
-            </li>
-            <li>
-            	<img src="images/t1.png" />
-                <p>啊看手机打开撒旦撒扩大了凯撒的雷克萨的就凉...</p>
-            </li>
-            <li class="last">
-            	<img src="images/t1.png" />
-                <p>啊看手机打开撒旦撒扩大了凯撒的雷克萨的就凉...</p>
-            </li>
-            
-        </ul>
-    </div>
-</div>
-
-<!-- 地图 -->
-<div id="map">
-	<div class="map-l">
-    	<h3>哈哈哈</h3>
-    	<ul>
-        	<li><a href="#">觉得是多</a></li>
-            <li><a href="#">觉得是多</a></li>
-            <li><a href="#">觉得是多</a></li>
-            <li><a href="#">觉得是多</a></li>
-            <li><a href="#">觉得是多</a></li>
-            <li><a href="#">觉得是多</a></li>
-            <li><a href="#">觉得是多</a></li>
-            <li><a href="#">觉得是多</a></li>
-            <li><a href="#">觉得是多</a></li>
-            <li><a href="#">觉得是多</a></li>
-            <li><a href="#">觉得是多</a></li>
-            <li><a href="#">觉得是多</a></li>
-            <li><a href="#">觉得是多</a></li>   
-        </ul>
-    </div>
-	<div class="map-c">
-    	<h3>哈哈哈</h3>
-    	<ul>
-        	<li><a href="#">觉得是多</a></li>
-            <li><a href="#">觉得是多</a></li>
-            <li><a href="#">觉得是多</a></li>
-            <li><a href="#">觉得是多</a></li>
-        </ul>
-    </div>    
-	<div class="map-r">
-    	<h3>哈哈哈</h3>
-    
-    </div>
-</div>
-
-<!-- 页脚 -->
-<div id="footer">
-	<div class="footer-l">
-    	<a href="#">啊哈哈啊哈</a>
-    	<span>|</span>
-        <a href="#">啊哈哈啊哈</a>
-    	<span>|</span>
-        <a href="#">啊哈哈啊哈</a>
-    	<span>|</span>
-        <a href="#">啊哈哈啊哈</a>        
-    </div>
-	<div class="footer-r">撒娇的凯撒 &copy; 的凯萨琳的撒了肯德基撒旦<img src="images/fengxiang.png" /><img src="images/fengxiang.png" /></div>
-</div>
-
-</body>
+  </body>
 </html>
