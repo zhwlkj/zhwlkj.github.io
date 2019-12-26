@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>privacy</title>
+    <style>
+      .bg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        z-index: 1;
+      }
+      .bg.active {
+        z-index: 2;
+      }
+      .centerBox {
+        z-index: 5;
+      }
+      .clearfix {
+        *zoom: 1;
+      }
+      .clearfix:before,
+      .clearfix:after {
+        display: table;
+        line-height: 0;
+        content: '';
+      }
+      .clearfix:after {
+        clear: both;
+      }
+      body {
+        font-family: 'Roboto', Arial, sans-serif;
+        color: #fff;
+        background: #000;
+        margin: 0;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-size-adjust: 100%;
+        -webkit-transition: opacity 400ms;
+        -moz-transition: opacity 400ms;
+        transition: opacity 400ms;
+      }
+      a,
+      a:visited {
+        color: #eee;
+        text-decoration: none;
+        cursor: pointer !important;
+      }
+      a:hover,
+      a:active {
+        color: #eee;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: 'Roboto', Arial, sans-serif;
+      }
+      h1 {
+        font-size: 2.5em;
+        font-weight: 300;
+      }
+      h2 {
+        font-size: 1.5em;
+        font-weight: 300;
+      }
+      h3 {
+        font-size: 1.2em;
+        font-weight: 400;
+      }
+      .centerBox {
+        position: absolute;
+        top: 50%;
+        margin-top: -210px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+      }
+      .menu {
+        max-width: 624px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        height: 395px;
+      }
+      .container .header {
+        margin: 0 auto;
+        padding: 5px;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.01);
+      }
+      .container .header span {
+        display: block;
+        font-size: 60%;
+        opacity: 0.8;
+        padding-bottom: 0.6em;
+      }
+      .nav-top {
+        text-transform: uppercase;
+        width: 100%;
+        line-height: 2.6;
+        height: 36px;
+        position: absolute;
+        bottom: 0;
+      }
+      .nav-top a {
+        padding: 0.41em 1em;
+        letter-spacing: 0.1em;
+        color: #eee;
+        display: inline-block;
+        font-size: 10px;
+      }
+      .nav-top a:hover {
+        color: #fff;
+      }
+      .nav-top span.right {
+        float: right;
+      }
+      .nav-top span.right a {
+        float: left;
+        display: block;
+      }
+      .nav-top,
+      .header,
+      .menu {
+        position: relative;
+      }
+      #appDownload {
+        width: 100%;
+        text-align: center;
+        position: absolute;
+        bottom: 50px;
+        left: 0;
+        border: 0;
+        outline: 0;
+        z-index: 100;
+        color: #bbb;
+        background: transparent;
+        -moz-transition: all 0.2s cubic-bezier(0.7, 0.01, 0.3, 1);
+        -o-transition: all 0.2s cubic-bezier(0.7, 0.01, 0.3, 1);
+        -webkit-transition: all 0.2s cubic-bezier(0.7, 0.01, 0.3, 1);
+        transition: all 0.2s cubic-bezier(0.7, 0.01, 0.3, 1);
+        font: 36px Heiti, 'Lucida Grande', Arial;
+        font-weight: bold;
+      }
+      #appDownload span img {
+        width: 50px;
+        height: 50px;
+      }
+      #appDownload span {
+        display: inline-block;
+        position: relative;
+        top: -10px;
+        -moz-transition: all 0.7s cubic-bezier(0.7, 0.01, 0.3, 1);
+        -o-transition: all 0.7s cubic-bezier(0.7, 0.01, 0.3, 1);
+        -webkit-transition: all 0.7s cubic-bezier(0.7, 0.01, 0.3, 1);
+        transition: all 0.7s cubic-bezier(0.7, 0.01, 0.3, 1);
+      }
+      .homeHeader {
+        margin-top: 0;
+      }
+      .logo {
+        max-width: 220px;
+        width: 100%;
+        margin: 0 auto;
+      }
+      .sublogo {
+        max-width: 90px;
+        width: 100%;
+        margin: 0 auto;
+        margin-bottom: -29px;
+      }
+      .menulogo {
+        max-width: 90px;
+        width: 100%;
+        margin: 0 auto;
+      }
+      .downloadBtnHome {
+        max-width: 172px;
+        width: 100%;
+      }
+      .headerLink {
+        color: #fff;
+        font-size: 10px;
+        text-transform: uppercase;
+      }
+      .dlIcons {
+        max-width: 20px;
+      }
+      .dlIconsSideMenu {
+        max-width: 30px;
+      }
+      .menuDLiconsBox {
+        position: absolute;
+        bottom: 40px;
+      }
+      .menuDLicons {
+        display: inline !important;
+        margin: 0 0 0 25px !important;
+        padding: 0 !important;
+      }
+      #sticker a {
+        line-height: 12px;
+        font-size: 16px;
+        color: #eee;
+      }
+      #sticker a:hover {
+        color: #fff;
+      }
+      #sticker ul {
+        list-style: none;
+      }
+      #sticker li {
+        padding-bottom: 10px;
+      }
+      div#wrapper {
+        margin: 0 auto;
+        width: auto;
+        max-width: 787px;
+        word-wrap: break-word;
+      }
+      .aboutContainer {
+        padding: 20px;
+      }
+      div#sideBar {
+        width: 177px;
+        padding: 43px 0 20px 0;
+        margin-right: 0;
+        float: left;
+        text-align: right;
+      }
+      .clear {
+        clear: both;
+      }
+      div#sticker {
+        padding: 20px 0;
+        margin: 0 0;
+        width: 177px;
+      }
+      .stick {
+        position: fixed;
+        top: 0;
+      }
+      .container {
+        -webkit-animation: fadein 1s;
+        -moz-animation: fadein 1s;
+        -ms-animation: fadein 1s;
+        -o-animation: fadein 1s;
+        animation: fadein 1s;
+      }
+      @keyframes fadein {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @-moz-keyframes fadein {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @-webkit-keyframes fadein {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @-ms-keyframes fadein {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @-o-keyframes fadein {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      .content-wrap {
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+      }
+      .content-wrap {
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+      }
+      .content {
+        position: relative;
+        background: #b4bad2;
+      }
+      @media only screen and (max-width: 768px) {
+        .sublogo {
+          display: block;
+          margin-bottom: 0;
+          padding: 20px 0 0 0;
+        }
+        .subheader {
+          display: block;
+          text-align: center;
+          font-size: 32px;
+        }
+        #appDownload {
+          bottom: 5px;
+        }
+        .centerBox {
+          margin-top: -200px;
+        }
+        div#sideBar {
+          display: none;
+        }
+      }
+      .tousec li {
+        padding-bottom: 0.5em;
+      }
+      .touOlDecimal {
+        margin-left: 40px;
+        list-style: decimal outside none;
+      }
+      .touOlUpperAlpha {
+        list-style: upper-alpha inside none;
+      }
+      .touOlUpperAlpha li {
+        padding-bottom: 0.5em;
+        text-indent: 40px;
+      }
+      .touOlLowerAlpha {
+        margin-left: 40px;
+        list-style: lower-alpha outside none;
+      }
+      .touOlLowerRoman {
+        margin-left: 40px;
+        list-style: lower-roman outside none;
+      }
+      .touOlLowerRoman li {
+        text-indent: 0;
+      }
+      .touUlDisc {
+        margin-left: 40px;
+        list-style: disc outside none;
+      }
+      .touUlDisc li {
+        text-indent: 0;
+      }
+      .ppsec li {
+        padding-bottom: 0.5em;
+      }
+      .ppOlDecimal {
+        margin-left: 40px;
+        list-style: decimal outside none;
+      }
+      .ppOlUpperAlpha {
+        list-style: upper-alpha inside none;
+      }
+      .ppOlUpperAlpha li {
+        padding-bottom: 0.5em;
+        text-indent: 40px;
+      }
+      .ppOlLowerAlpha {
+        margin-left: 40px;
+        list-style: lower-alpha outside none;
+      }
+      .ppOlLowerRoman {
+        margin-left: 40px;
+        list-style: lower-roman outside none;
+      }
+      .ppOlLowerRoman li {
+        text-indent: 0;
+      }
+      .ppUlDisc {
+        margin-left: 40px;
+        list-style: disc outside none;
+      }
+      .ppUlDisc li {
+        text-indent: 0;
+      }
+      @media print {
+        q {
+          quotes: none;
+        }
+        q:before,
+        q:after {
+          content: '';
+        }
+        img {
+          display: none;
+          border: 0;
+        }
+        button {
+          display: none;
+          border: 0;
+        }
+        .menu-button {
+          display: none;
+          border: 0;
+        }
+        body {
+          font: 12pt arial, helvetica, tahoma, san-serif;
+          line-height: 1.5;
+          color: #000 !important;
+          background: #fff !important;
+        }
+        p {
+          font-size: 12px !important;
+        }
+        h1 {
+          font-size: 18px !important;
+        }
+        h2 {
+          font-size: 14px;
+          margin-top: 25px;
+          font-weight: bold;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="mainContent">
+        <article class="aboutContainer">
+          <div class="aboutText">
+            <h1 class="subheader">FAQ</h1>
+            <h3>Who is Grab Chat for?</h3>
+            <p>
+              Grab Chat is for everyone who wants fast and reliable messaging
+              and calls. Business users and small teams may like the large
+              groups, usernames, desktop apps and powerful file sharing options.
+            </p>
+            <p>
+              Since Grab Chat groups can have up to 10,000 members, we support
+              replies, mentions and hashtags that help maintain order and keep
+              communication in large communities efficient. You can appoint
+              admins with advanced tools to help these communities prosper in
+              peace. Public groups can be joined by anyone and are powerful
+              platforms for discussions and collecting feedback.
+            </p>
+            <p>
+              In case you're more into pictures, Grab Chat has animated gif
+              search, a state of the art photo editor, and an open sticker
+              platform (find some cool stickers here or here). What‘s more,
+              there is no need to worry about disk space on your device. With
+              Grab Chat's cloud support and cache management options, Grab Chat
+              can take up nearly zero space on your phone.
+            </p>
+            <p>
+              Those looking for extra privacy should check out our advanced
+              settings and rather revolutionary policy. And if you want secrecy,
+              try our device-specific Secret Chats with self-destructing
+              messages, photos, and videos — and lock your app with an
+              additional passcode.
+            </p>
+            <h3>How is Grab Chat different from WhatsApp?</h3>
+            <p>
+              Unlike WhatsApp, Grab Chat is a cloud-based messenger with
+              seamless sync. As a result, you can access your messages from
+              several devices at once, including tablets and computers, and
+              share an unlimited number of photos, videos and files (doc, zip,
+              mp3, etc.) of up to 1 GB each. And if you don't want to store all
+              that data on your device, you can always keep it in the cloud.
+            </p>
+            <p>
+              Thanks to our multi-data center infrastructure and encryption,
+              Grab Chat is faster and way more secure. On top of that, Grab Chat
+              is free and will stay free — no ads, no subscription fees,
+              forever.
+            </p>
+            <p>
+              Our API is open, and we welcome developers to create their own
+              Grab Chat apps. We also have a Bot API, a platform for developers
+              that allows anyone to easily build specialized tools for Grab
+              Chat, integrate any services, and even accept payments from users
+              around the world.
+            </p>
+            <p>
+              And that‘s just the tip of the iceberg. Don’t forget to check out
+              this paragraph for even more exclusive stuff.
+            </p>
+          </div>
+          <br />
+          <br />
+          <br />
+          &nbsp;
+        </article>
+      </div>
+    </div>
+  </body>
+</html>
